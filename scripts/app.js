@@ -177,7 +177,17 @@ class Game{
         }
     }, 100);
 }
-    setPiece(){
+    
+}
+const game = new Game()
+for (let r = 0; r < game.gameBoard.getRows(); r++) {
+    for (let c = 0; c < game.gameBoard.getColumns(); c++) {
+        let tile = document.getElementById(r.toString() + "-" + c.toString())
+        tile.addEventListener("click", setPiece)
+        document.getElementById("board").append(tile)                
+    }
+}    
+fuction setPiece(){
     if (game.gameOver) {
         return;
     }
@@ -204,15 +214,6 @@ class Game{
     game.currColumns[c] = r
     game.checkWinner()
 }
-}
-const game = new Game()
-for (let r = 0; r < game.gameBoard.getRows(); r++) {
-    for (let c = 0; c < game.gameBoard.getColumns(); c++) {
-        let tile = document.getElementById(r.toString() + "-" + c.toString())
-        tile.addEventListener("click", setPiece)
-        document.getElementById("board").append(tile)                
-    }
-}    
 
 function showConfirmation() {
     if (confirm("Are you sure you want to restart the game?")) {
