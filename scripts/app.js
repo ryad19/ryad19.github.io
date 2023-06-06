@@ -48,6 +48,33 @@ class GameBoard{
         if(r>=0 && c>= 0)
             return this.board[r][c]
     }
+    setPiece(){
+            if (game.gameOver) {
+                return;
+            }
+            let coords = this.id.split("-")
+            let r = parseInt(coords[0])
+            let c = parseInt(coords[1])
+            r = game.currColumns[c]
+            if (r < 0) { 
+                return;
+            }
+            game.gameBoard.setDisc(r, c, game.currPlayer)
+            let tile = document.getElementById(r.toString() + "-" + c.toString())
+            if (game.currPlayer == game.playerRed) {
+                document.getElementById("trn").innerHTML ="<span style='color: ##274c77;'>"+age+" Turn"+"</span>" 
+                tile.classList.add("red-piece")
+                game.setCurrPlayer(game.playerYellow)
+            }
+            else {
+                document.getElementById("trn").innerHTML = "<span style='color: ##274c77;'>"+name+" Turn"+"</span>"
+                tile.classList.add("yellow-piece")
+                game.setCurrPlayer(game.playerRed)
+            }
+            r -= 1
+            game.currColumns[c] = r
+            game.checkWinner()
+        }
     
 }
 class Game{
@@ -178,33 +205,7 @@ class Game{
                 }
             }, 100);
         }
-         setPiece(){
-            if (game.gameOver) {
-                return;
-            }
-            let coords = this.id.split("-")
-            let r = parseInt(coords[0])
-            let c = parseInt(coords[1])
-            r = game.currColumns[c]
-            if (r < 0) { 
-                return;
-            }
-            game.gameBoard.setDisc(r, c, game.currPlayer)
-            let tile = document.getElementById(r.toString() + "-" + c.toString())
-            if (game.currPlayer == game.playerRed) {
-                document.getElementById("trn").innerHTML ="<span style='color: ##274c77;'>"+age+" Turn"+"</span>" 
-                tile.classList.add("red-piece")
-                game.setCurrPlayer(game.playerYellow)
-            }
-            else {
-                document.getElementById("trn").innerHTML = "<span style='color: ##274c77;'>"+name+" Turn"+"</span>"
-                tile.classList.add("yellow-piece")
-                game.setCurrPlayer(game.playerRed)
-            }
-            r -= 1
-            game.currColumns[c] = r
-            game.checkWinner()
-        }
+         
 }
 const game = new Game()
 for (let r = 0; r < game.gameBoard.getRows(); r++) {
