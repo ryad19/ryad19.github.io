@@ -178,7 +178,7 @@ class Game{
                 }
             }, 100);
         }
-        /*function*/ setPiece(){
+         setPiece(){
             if (game.gameOver) {
                 return;
             }
@@ -214,39 +214,11 @@ for (let r = 0; r < game.gameBoard.getRows(); r++) {
         document.getElementById("board").append(tile)                
     }
 }    
-function setPiece(){
-    if (game.gameOver) {
-        return;
-    }
-    let coords = this.id.split("-")
-    let r = parseInt(coords[0])
-    let c = parseInt(coords[1])
-    r = game.currColumns[c]
-    if (r < 0) { 
-        return;
-    }
-    game.gameBoard.setDisc(r, c, game.currPlayer)
-    let tile = document.getElementById(r.toString() + "-" + c.toString())
-    if (game.currPlayer == game.playerRed) {
-        document.getElementById("trn").innerHTML ="<span style='color: ##274c77;'>"+age+" Turn"+"</span>" 
-        tile.classList.add("red-piece")
-        game.setCurrPlayer(game.playerYellow)
-    }
-    else {
-        document.getElementById("trn").innerHTML = "<span style='color: ##274c77;'>"+name+" Turn"+"</span>"
-        tile.classList.add("yellow-piece")
-        game.setCurrPlayer(game.playerRed)
-    }
-    r -= 1
-    game.currColumns[c] = r
-    game.checkWinner()
-}
+
 function showConfirmation() {
     if (confirm("Are you sure you want to restart the game?")) {
       window.location.href = '2players.html';
     }
   }
   
-  document.getElementById("connect4Btn").addEventListener("click", function() {
-  window.location.href = "index.html";
-});
+ 
